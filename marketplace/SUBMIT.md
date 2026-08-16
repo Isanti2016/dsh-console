@@ -40,6 +40,19 @@ Fork https://github.com/awesome-dsh-plugin/awesome-dsh-plugin，在**两个文�
 | 活跃维护 | ✅（有问题可在仓库 issue 反馈） |
 | （推荐）发布 npm，官方包用 peerDependencies | ✅ peerDependencies 已按规范；npm 发布见下 |
 
+## ⚠️ 常见坑（PR check 失败原因）
+
+1. **中文分隔符必须用破折号 `—`，不能用连字符 `-`**
+   构建的 locale parity 检查（`node scripts/build-site.mjs`）按 `site/locales.mjs` 校验：
+   - 英文条目分隔符：`-`（连字符）
+   - 中文条目分隔符：`—`（em dash，因为连字符在中文里读作标点）
+   中文行用了 `-` 会让 PR check 的 `Build` 步骤直接失败：
+   `README.zh.md separates <url> with "-" — this file uses "—"`。
+   正确写法：`- [owner/repo](url) — 一句话描述。`
+2. 两个语言文件都要加对应条目（英文漏了或中文漏了都会报 parity 错）。
+3. 条目 URL 必须与仓库实际地址完全一致（`https://github.com/<owner>/<repo>`，不要带多余路径）。
+4. 只改自己这一行，别动其他条目（改动过多会触发 stale-fork 检查）。
+
 ## （可选）发布到 npm —— 安装体验更好
 
 ```sh
