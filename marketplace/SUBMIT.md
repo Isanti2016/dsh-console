@@ -1,54 +1,59 @@
-# 提交到插件市场（dsh-market / awesome-dsh-plugin）
+# 提交到插件市场（awesome-dsh-plugin）
 
-dsh 内置的插件市场读取策展仓库 **awesome-dsh-plugin**
-（https://github.com/awesome-dsh-plugin/awesome-dsh-plugin）的注册清单；
-只有清单内的来源才允许安装。让 `dsh-console` 上架，需要两步：
+dsh 插件市场（`dsh-market`，DSH 设置 → 插件市场）由策展清单
+**awesome-dsh-plugin**（https://github.com/awesome-dsh-plugin/awesome-dsh-plugin）驱动。
+官方提交方式（见仓库 `contributing.md`）：**给 README 加一行**的 PR。
 
-## 第一步：把插件推到 GitHub（并可选发 npm）
+## 需要你完成的步骤（需要你的 GitHub 登录）
 
-1. 在 GitHub 新建仓库，例如 `dsh-console`（建议公开）。
-2. 推送本目录代码：
+### 1. 给仓库加 `dsh-plugin` topic（必选）
 
-```sh
-git remote add origin https://github.com/<你的用户名>/dsh-console.git
-git push -u origin main
+打开 https://github.com/Isanti2016/dsh-console → **About**（右上）→ ⚙️ →
+Topics 里加 `dsh-plugin`，Save。
+
+### 2. 提 PR 给 awesome-dsh-plugin 加两行
+
+Fork https://github.com/awesome-dsh-plugin/awesome-dsh-plugin，在**两个文件**对应分类下各加一行：
+
+**`README.md`**，放在 `### Tools & Capabilities` 分类末尾：
+
+```markdown
+- [Isanti2016/dsh-console](https://github.com/Isanti2016/dsh-console) - Slash-command console for dsh: /web start|stop|restart|status, /tunnel SSH forward management, one-shot /ask, and a console TUI launcher.
 ```
 
-3. （推荐）发布到 npm，用户可直接 `dsh plugin add dsh-console` 安装：
+**`README.zh.md`**，放在 `### 🛠️ 工具与能力` 分类末尾：
+
+```markdown
+- [Isanti2016/dsh-console](https://github.com/Isanti2016/dsh-console) - dsh 控制台命令：/web 启动/停止/重启/状态、/tunnel SSH 隧道管理、/ask 一次性问答、/console 启动控制台 TUI。
+```
+
+合并后网站自动重建，用户在 DSH 插件市场即可搜到 `dsh-console`。
+
+## 官方要求核对
+
+| 要求 | 状态 |
+| --- | --- |
+| `package.json` 声明 `dsh.bundle`（含 `cordis.patch.yml`） | ✅ |
+| 真实可用代码（非占位/纯 README） | ✅ |
+| 仓库加 `dsh-plugin` topic | ⏳ 见步骤 1 |
+| 描述只讲功能、无营销词 | ✅ |
+| 活跃维护 | ✅（有问题可在仓库 issue 反馈） |
+| （推荐）发布 npm，官方包用 peerDependencies | ✅ peerDependencies 已按规范；npm 发布见下 |
+
+## （可选）发布到 npm —— 安装体验更好
 
 ```sh
 npm login
 npm publish --access public
 ```
 
-> 只发 GitHub 也可以：`dsh plugin --profile web add github:<你的用户名>/dsh-console`
-> （GitHub 安装会跑 `prepare` 脚本；本包无构建步骤，`prepare` 无需特殊处理）。
+发布后用户可直接 `dsh plugin --profile web add dsh-console`（免 GitHub 构建授权）。
 
-## 第二步：把条目加进 awesome-dsh-plugin 注册清单
-
-1. 打开 https://github.com/awesome-dsh-plugin/awesome-dsh-plugin
-2. 找到注册数据文件（`registry.json` 或类似，参考现有条目）。
-3. 把 `marketplace/dsh-console.entry.json` 里的条目复制进去，
-   把 `YOUR_GITHUB_USERNAME` 换成你的真实用户名。
-4. 提 PR。合并后，用户在 DSH 设置 → 插件市场里即可搜索到 `dsh-console`。
-
-## 条目字段说明
-
-| 字段 | 值 | 说明 |
-| --- | --- | --- |
-| `name` | `dsh-console` | 插件名 |
-| `owner` | 你的 GitHub 用户名 | 仓库所有者 |
-| `url` | 仓库地址 | 必须真实可达（市场会校验来源） |
-| `category` | `tools` | 分类（tools = 工具与能力） |
-| `description` | en/zh 双语 | 会按界面语言显示 |
-| `npm` | `dsh-console` | 发布了 npm 就填包名；没发布填 `null` 并改 `install` 为 github 形式 |
-| `install` | 安装命令 | 与 `npm` 对应 |
-
-## 本地快速验证（提交前自查）
+## 本地自查（提交 PR 前）
 
 ```sh
-pnpm pack                                   # 打出 dsh-console-0.1.0.tgz
-dsh plugin --profile test-console add ./dsh-console-0.1.0.tgz
-dsh --profile test-console --dump-config   # 应出现 "# == dsh-console" 层
-npm test                                    # 后端只读冒烟
+npm test                      # 后端只读冒烟
+pnpm pack                     # 打出 dsh-console-0.1.0.tgz
+dsh plugin --profile t add ./dsh-console-0.1.0.tgz
+dsh --profile t --dump-config # 应出现 "# == dsh-console" 层
 ```
