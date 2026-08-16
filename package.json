@@ -14,6 +14,9 @@
   "scripts": {
     "test": "node test/backend.test.js"
   },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.0"
+  },
   "keywords": [
     "dsh",
     "deepseek-harness",
