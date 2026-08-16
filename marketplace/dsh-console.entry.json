@@ -1,0 +1,15 @@
+{
+  "name": "dsh-console",
+  "owner": "YOUR_GITHUB_USERNAME",
+  "url": "https://github.com/YOUR_GITHUB_USERNAME/dsh-console",
+  "page": "https://awesome-dsh-plugin.com/p/YOUR_GITHUB_USERNAME/dsh-console/",
+  "category": "tools",
+  "description": {
+    "en": "Console commands for DeepSeek Harness: /web start|stop|restart|status, /tunnel start|stop|status (SSH), /ask one-shot question, and /console to launch the dsh-tui.",
+    "zh": "DSH 控制台命令：/web 启动/停止/重启/状态、/tunnel SSH 隧道管理、/ask 一次性问答、/console 启动 dsh-tui 操作台。"
+  },
+  "npm": "dsh-console",
+  "stars": 0,
+  "install": "dsh plugin --profile web add dsh-console",
+  "added": "2026-08-16"
+}
