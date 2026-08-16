@@ -14,7 +14,7 @@
   "scripts": {
     "test": "node test/backend.test.js"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@deepseek-ai/schemastery": "^3.18.0"
   },
   "keywords": [
