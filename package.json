@@ -1,0 +1,32 @@
+{
+  "name": "dsh-console",
+  "version": "0.1.0",
+  "description": "Console commands for DeepSeek Harness: web service / SSH tunnel management, one-shot ask, and the dsh-tui launcher.",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md"
+  ],
+  "scripts": {
+    "test": "node test/backend.test.js"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "bundle",
+    "console",
+    "tunnel",
+    "web"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# dsh-console bundle layer: mount the console command plugin.
+# The row carries deployment config; defaults live on the plugin schema.
+- insert:
+    - id: dsh-console
+      name: dsh-console
